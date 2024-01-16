@@ -1,31 +1,28 @@
 import React, {useState} from "react";
 import Header from "./Header"
-import notes from "../list"
-import Note from "./notes";
+
 
 
 
 function App() {
 
-    const [begin, setBegin] = useState(0);
+    var newTime = new Date().toLocaleTimeString()
 
-    function increase() {
-        setBegin(begin + 1)
-    }
+    const [currentTime, setCurrentTime] = useState(newTime);
 
-    function decrease() {
-        setBegin(begin - 1)
+
+    function time() {
+        setCurrentTime(newTime)
     }
 
     return (
         <div>
             <Header />
             <div className="main">
-                <h1>{begin}</h1>
-
-                    <button onClick={increase}>+</button>
-                    <button onClick={decrease}>-</button>
-                    
+                <h1>{currentTime}</h1>
+                <div>
+                    <button onClick={time}>currentTime</button>
+                </div>
             </div>
             <footer />
         </div>
