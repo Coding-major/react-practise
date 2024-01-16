@@ -1,17 +1,19 @@
 import React from "react";
 import Header from "./Header"
-import Fruit from "./Fruits";
-import fruitList from "../fruits"
+import notes from "../list"
+import Note from "./notes";
 
-function createFruit(eachFruit) {
-    return <Fruit id={eachFruit.id} key={eachFruit.id} name={eachFruit.name} link={eachFruit.img} expire={eachFruit.expireDate} color={eachFruit.color} />
-}
 
 function App() {
     return (
         <div>
             <Header />
-            {fruitList.map(createFruit)}
+            <div className="main">
+                {notes.map((note) => {
+                    return <Note title={note.title} content={note.content} />
+                })}
+            </div>
+            <footer />
         </div>
     )
 }
