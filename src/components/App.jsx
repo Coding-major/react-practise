@@ -3,7 +3,8 @@ import React, {useState} from "react";
 function App() {
 
     const [BgColor, setBgColor] = useState(false)
-    const [name, setName] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [newName, setNewName] = useState("")
 
 
@@ -15,13 +16,20 @@ function App() {
         setBgColor(false)
     }
 
-    function myFunction(event) {
-        setName(event.target.value)
+    function myFunction1(event) {
+        setFirstName(event.target.value)
+
+        console.log(event.target.value)
+    }
+
+    function myFunction2(event) {
+        setLastName(event.target.value)
+
         console.log(event.target.value)
     }
 
     function theFunction(event) {
-        setNewName(name)
+        setNewName(firstName +" " + lastName)
         // if(name === "") {
         //     setNewName("")
         // } else {
@@ -32,10 +40,13 @@ function App() {
 
     return (
         <div className="container">
-            <h1>{newName === "" ? "Hello" : `Hello, ${newName}`}</h1>
-            {/* <h1>{newName}</h1> */}
+            
+            {/* <h1>{newName === "" ? "Hello" : `Hello, ${newName}`}</h1> */}
+            <h1>{newName}</h1>
+            {/* <h1>Hello {firstName} {lastName}</h1> */}
             <form onSubmit={theFunction}>
-                <input onChange={myFunction} type="text" placeholder="What's your name?" />
+                <input onChange={myFunction1} type="text" placeholder="What's your first name?" />
+                <input onChange={myFunction2} type="text" placeholder="What's your last name?" />
                 <button 
                     style={{backgroundColor: BgColor ? "black" : "white"}} 
                     onMouseOver={changeBgColor}
