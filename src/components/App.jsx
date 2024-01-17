@@ -1,38 +1,48 @@
 import React, {useState} from "react";
-import Header from "./Header"
-import cars from "../cars";
 
- function App() {   
+function App() {
 
-    return ( 
-        <div>
-            <Header />
-            <div className="main">
+    const [BgColor, setBgColor] = useState(false)
+    const [name, setName] = useState("");
+    const [newName, setNewName] = useState("")
 
-                <table style={{border: '1px solid red'}}>
-                    <thead style={{border: '1px solid red'}}>
-                        <th>model</th>
-                        <th>color</th>
-                        <th>topSpeed</th>
-                    </thead>
-                    <tbody>
-                        {cars.map((eachCar) => {
-                            return (
-                                <tr>
-                                    <td style={{border: '1px solid red'}}>{eachCar.model}</td>
-                                    <td style={{border: '1px solid red'}}>{eachCar.coloursByPopularity[0]}</td>
-                                    <td style={{border: '1px solid red'}}>{eachCar.speedStats.topSpeed}</td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
 
-            </div>
-            <footer />
+    function changeBgColor() {
+        setBgColor(true)
+    }
+
+    function changeBack() {
+        setBgColor(false)
+    }
+
+    function myFunction(event) {
+        setName(event.target.value)
+        console.log(event.target.value)
+    }
+
+    function theFunction(event) {
+        setNewName(name)
+        // if(name === "") {
+        //     setNewName("")
+        // } else {
+        //     setNewName(`Hello, ${name}`)
+        // }
+        event.preventDefault()
+    }
+
+    return (
+        <div className="container">
+            <h1>{newName === "" ? "Hello" : `Hello, ${newName}`}</h1>
+            {/* <h1>{newName}</h1> */}
+            <form onSubmit={theFunction}>
+                <input onChange={myFunction} type="text" placeholder="What's your name?" />
+                <button 
+                    style={{backgroundColor: BgColor ? "black" : "white"}} 
+                    onMouseOver={changeBgColor}
+                    onMouseOut={changeBack} type="submit">Submit</button>
+            </form>
         </div>
-    )
+    );
 }
-
 
 export default App;
