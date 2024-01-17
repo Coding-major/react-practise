@@ -21,19 +21,18 @@ function App() {
     }
 
     function nameFunction(event) {
-        var newValue = event.target.value;
-        var checkName = event.target.name;
+        var {name, value} = event.target
 
         setName((previousValue) => {
-            if(checkName === "fname") {
+            if(name === "fname") {
                 return {
-                    firstName: newValue,
+                    firstName: value,
                     lastName: previousValue.lastName
                 }
-            } else if(checkName === 'lname') {
+            } else if(name === 'lname') {
                 return {
                     firstName: previousValue.firstName,
-                    lastName: newValue
+                    lastName: value
                 }
             }
         })
