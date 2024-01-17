@@ -3,8 +3,12 @@ import React, {useState} from "react";
 function App() {
 
     const [BgColor, setBgColor] = useState(false)
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [name, setName] = useState(
+        {
+            firstName: "",
+            lastName: ""
+        }
+    );
     const [newName, setNewName] = useState("")
 
 
@@ -16,20 +20,29 @@ function App() {
         setBgColor(false)
     }
 
-    function myFunction1(event) {
-        setFirstName(event.target.value)
+    function nameFunction(event) {
+        var newValue = event.target.value;
+        var checkName = event.target.name;
 
-        console.log(event.target.value)
-    }
-
-    function myFunction2(event) {
-        setLastName(event.target.value)
+        setName((previousValue) => {
+            if(checkName === "fname") {
+                return {
+                    firstName: newValue,
+                    lastName: previousValue.lastName
+                }
+            } else if(checkName === 'lname') {
+                return {
+                    firstName: previousValue.firstName,
+                    lastName: newValue
+                }
+            }
+        })
 
         console.log(event.target.value)
     }
 
     function theFunction(event) {
-        setNewName(firstName +" " + lastName)
+        setNewName(name)
         // if(name === "") {
         //     setNewName("")
         // } else {
@@ -42,11 +55,11 @@ function App() {
         <div className="container">
             
             {/* <h1>{newName === "" ? "Hello" : `Hello, ${newName}`}</h1> */}
-            <h1>{newName}</h1>
+            {newName ? <h1>Hello, ({newName.firstName} {newName.lastName})</h1> : <h1>Hello</h1>}
             {/* <h1>Hello {firstName} {lastName}</h1> */}
             <form onSubmit={theFunction}>
-                <input onChange={myFunction1} type="text" placeholder="What's your first name?" />
-                <input onChange={myFunction2} type="text" placeholder="What's your last name?" />
+                <input name="fname" onChange={nameFunction} type="text" placeholder="What's your first name?" />
+                <input name="lname" onChange={nameFunction} type="text" placeholder="What's your last name?" />
                 <button 
                     style={{backgroundColor: BgColor ? "black" : "white"}} 
                     onMouseOver={changeBgColor}
