@@ -3,10 +3,11 @@ import React, {useState} from "react";
 function App() {
 
     const [BgColor, setBgColor] = useState(false)
-    const [name, setName] = useState(
+    const [contact, setContact] = useState(
         {
             firstName: "",
-            lastName: ""
+            lastName: "",
+            email: ""
         }
     );
     const [newName, setNewName] = useState("")
@@ -23,16 +24,24 @@ function App() {
     function nameFunction(event) {
         var {name, value} = event.target
 
-        setName((previousValue) => {
-            if(name === "fname") {
+        setContact((previousValue) => {
+            if (name === 'fname') {
                 return {
                     firstName: value,
-                    lastName: previousValue.lastName
+                    lastName: previousValue.lastName,
+                    email: previousValue.email
                 }
-            } else if(name === 'lname') {
+            } else if (name === "lname") {
                 return {
                     firstName: previousValue.firstName,
-                    lastName: value
+                    lastName: value,
+                    email: previousValue.email
+                }
+            } else if (name === "email") {
+                return {
+                    firstName: previousValue.firstName,
+                    lastName: previousValue.lastName,
+                    email: value
                 }
             }
         })
@@ -41,7 +50,7 @@ function App() {
     }
 
     function theFunction(event) {
-        setNewName(name)
+        setNewName(contact)
         // if(name === "") {
         //     setNewName("")
         // } else {
@@ -52,13 +61,12 @@ function App() {
 
     return (
         <div className="container">
-            
-            {/* <h1>{newName === "" ? "Hello" : `Hello, ${newName}`}</h1> */}
-            {newName ? <h1>Hello, ({newName.firstName} {newName.lastName})</h1> : <h1>Hello</h1>}
-            {/* <h1>Hello {firstName} {lastName}</h1> */}
             <form onSubmit={theFunction}>
-                <input name="fname" onChange={nameFunction} type="text" placeholder="What's your first name?" />
-                <input name="lname" onChange={nameFunction} type="text" placeholder="What's your last name?" />
+                {newName.firstName || newName.lastName ? <h1>Hello, {newName.firstName} {newName.lastName}</h1> : <h1>Hello, Welcome</h1>}
+                <p>{newName.email}</p>
+                <input name="fname" onChange={nameFunction} type="text" placeholder="What's your first name?" value={newName.firstName}/>
+                <input name="lname" onChange={nameFunction} type="text" placeholder="What's your last name?" value={newName.lastName}/>
+                <input name="email" type="text" onChange={nameFunction} placeholder="email?" value={newName.email} />
                 <button 
                     style={{backgroundColor: BgColor ? "black" : "white"}} 
                     onMouseOver={changeBgColor}
