@@ -1,33 +1,17 @@
-import React, {useState} from "react";
-import UnOrdered from "./Ulist";
+import React from "react";
 
-function Form() {
-    const [theInput, setTheInput]  = useState("")
-    const [items, setItems] = useState([])
+function Form(props) {
 
-    function handleChange(event) {
-        var {value} = event.target;
-        console.log(value);
-        setTheInput(value)
-    }
-
-    function handleSubmit() {
-        setItems((previousValue) => {
-           return [...previousValue, theInput]
-        })
-
-        setTheInput("")
-    }
+    const {onChange, onSubmit, value} = props
 
     return (
         <>
         <div className="form">
-            <input type="text" onChange={handleChange} value={theInput} />
-            <button onClick={handleSubmit}>
+            <input type="text" onChange={onChange} value={value} />
+            <button onClick={onSubmit}>
                 <span>Add</span>
             </button>
         </div>
-        <UnOrdered items={items} />
         </>
     )
 }
