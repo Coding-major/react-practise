@@ -1,14 +1,16 @@
 import React from "react";
-import Todo from "./TodoList";
 
 function UnOrdered(props) {
 
-    const { items } = props;
+    const { items , trigger} = props;
+    
     return (
         <div>
             <ul>
-                {items.map((eachItem, index) => {
-                        return <Todo key={index} name={eachItem}/>
+                {items.map((item, index) => {
+                    return <li key={index}><input key={index}  type="checkbox" onClick={() => {
+                        trigger(index)
+                    }} /> {item}</li>
                 })}
             </ul>
         </div>

@@ -11,7 +11,6 @@ function App() {
 
     function handleChange(event) {
         var {value} = event.target;
-        console.log(value);
         setTheInput(value)
     }
 
@@ -23,13 +22,21 @@ function App() {
         setTheInput("")
     }
 
+    function deleted (id) {
+        setItems((previousValue) => {
+            return previousValue.filter((item, index) => {
+                return index !==id
+            })
+        })
+    }
+
     return (
     <div className="container">
         <div className="heading">
             <h1>To-Do List</h1>
         </div>
         <Form onChange={handleChange} onSubmit={handleSubmit} value={theInput}/>
-        <UnOrdered items={items}/>
+        <UnOrdered trigger={deleted} items={items}/>
         
         
     </div>
